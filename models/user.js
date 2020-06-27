@@ -48,7 +48,8 @@ module.exports = (sequelize) => {
   }, {
     sequelize,
     modelName: 'User',
-    comment: '用户表'
+    comment: '用户表',
+    underscored: true
   });
   return User;
 };

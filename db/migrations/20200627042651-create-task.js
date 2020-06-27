@@ -1,42 +1,42 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Tasks', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-        defaultValue: '',
-        comment: '登录账号，手机号或邮箱'
-      },
-      password: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: '',
-        comment: '登录密码'
+        comment: '任务名称'
       },
-      nickname: {
-        type: Sequelize.STRING(50),
-        allowNull: true,
+      content: {
+        type: Sequelize.TEXT,
+        allowNull: false,
         defaultValue: '',
-        comment: '昵称'
+        comment: '任务内容'
       },
-      avator: {
+      gmt_expire: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
         defaultValue: '',
-        comment: '用户头像'
+        comment: '截止日期'
       },
-      sex: {
-        type: Sequelize.STRING(20),
+      status: {
+        type: Sequelize.INTEGER,
         allowNull: true,
-        defaultValue: '',
-        comment: '性别：u:未知,  m:男,  w:女'
+        defaultValue: 0,
+        comment: '0: 代办，1: 完成，2: 删除'
+      },
+      is_major: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+        comment: '0: 不重要，1: 重要'
       },
       created_at: {
         allowNull: false,
@@ -49,6 +49,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Tasks');
   }
 };
